@@ -20,6 +20,15 @@ const categoriesWithCounts = data.reduce((obj, item) => {
   return obj;
 }, {}); // Initialize 'obj' as an empty object
 
-console.log(categoriesWithCounts);
+// Use Reduce to make an array of objects that have a name and a count
+const namesAndCategories = categoriesUnique.map(name => {
+  // return an object here with the name and count
+  return {
+    name: name,
+    count: categoriesWithCounts[name]
+  }
+})
+
+console.log(namesAndCategories);
 
 export default data;
