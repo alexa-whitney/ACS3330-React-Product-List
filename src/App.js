@@ -1,5 +1,5 @@
 import './App.css';
-import { namesAndCategories } from './data'
+import data, { namesAndCategories } from './data'
 
 function App() {
   return (
@@ -13,8 +13,18 @@ function App() {
             </button>
           ))}
         </div>
-      </header>
-    </div>
+        {/* Display the list of products */ }
+        <div className="product-list">
+          {data.map((product) => (
+            <div key={product.id} className="product">
+              <h2 className="product-name">{product.name}</h2>
+              <p className="product-category">{product.category}</p>
+              <p className="product-price">{product.price}</p>
+            </div>
+          ))}
+        </div>
+      </header >
+    </div >
   );
 }
 
