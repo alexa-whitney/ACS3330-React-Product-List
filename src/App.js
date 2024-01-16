@@ -22,13 +22,20 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {/* Display categories as buttons */}
         <div className="category-buttons">
+          {/* Add an "All" button to the list of category buttons */}
+          <CategoryButton
+            label="All"
+            onClick={() => handleCategoryClick('All')}
+            isSelected={selectedCategory === 'All'}
+          />
+          {/* Display categories as buttons */}
           {namesAndCategories.map((category, index) => (
             <CategoryButton
               key={index}
               label={category.name}
               onClick={() => handleCategoryClick(category.name)}
+              isSelected={selectedCategory === category.name}
             />
           ))}
         </div>
