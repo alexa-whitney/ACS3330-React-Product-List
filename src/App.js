@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import './data'
+import data, { allCategories, categoriesUnique, categoriesWithCounts, namesAndCategories } from './data'
 
 function App() {
   return (
