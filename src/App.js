@@ -1,23 +1,18 @@
-import logo from './logo.svg';
 import './App.css';
-import data, { allCategories, categoriesUnique, categoriesWithCounts, namesAndCategories } from './data'
+import { namesAndCategories } from './data'
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        {/* Display categories as buttons */}
+        <div className="category-buttons">
+          {namesAndCategories.map((category, index) => (
+            <button key={index} className="category-button">
+              {category.name}
+            </button>
+          ))}
+        </div>
       </header>
     </div>
   );
