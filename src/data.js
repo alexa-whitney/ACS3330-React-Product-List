@@ -7,6 +7,19 @@ const categorieSet = new Set(allCategories)
 // Make an array from a set with Array.from()
 const categoriesUnique = Array.from(categorieSet)
 
-console.log(categoriesUnique);
+const categoriesWithCounts = data.reduce((obj, item) => {
+  // 'item.category' is the category of the current item
+  // Check if this category already exists as a key in 'obj'
+  if (obj[item.category]) {
+    // If it exists, increment the count
+    obj[item.category] += 1;
+  } else {
+    // If it doesn't exist, add the key with a value of 1
+    obj[item.category] = 1;
+  }
+  return obj;
+}, {}); // Initialize 'obj' as an empty object
+
+console.log(categoriesWithCounts);
 
 export default data;
