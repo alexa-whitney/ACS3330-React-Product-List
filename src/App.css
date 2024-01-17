@@ -77,3 +77,19 @@
   font-weight: bold;
 }
 
+.product-units {
+  color: #4CAF50;
+}
+
+.product-rating {
+  color: rgb(175, 150, 6);
+}
+
+.badge {
+  background-color: #4CAF50;
+  color: white;
+  padding: 3px 6px;
+  border-radius: 10px;
+  margin-left: 5px;
+}
+

@@ -19,6 +19,24 @@ function App() {
     // Otherwise, return only the products whose category matches the selected category
     : data.filter(product => product.category === selectedCategory);
 
+  // STRETCH: Calculate the total sum of all product prices
+  const totalSum = data.reduce((sum, item) => {
+    const price = parseFloat(item.price.slice(1));
+    return sum + price;
+  }, 0)
+
+  // STRETCH: Calculate the total sum of all product prices in the selected category
+  const selectedSum = filteredData.reduce((sum, item) => {
+    const price = parseFloat(item.price.slice(1));
+    return sum + price;
+  }, 0);
+
+  // STRETHC: Calculate count for each category
+  const categoryCounts = namesAndCategories.map(category => ({
+    name: category.name,
+    count: data.filter(item => item.category === category.name).length
+  }));
+
   return (
     <div className="App">
       <header className="App-header">
@@ -34,11 +52,17 @@ function App() {
             <CategoryButton
               key={index}
               label={category.name}
+              count={category.count}
               onClick={() => handleCategoryClick(category.name)}
               isSelected={selectedCategory === category.name}
             />
           ))}
         </div>
+        {/* Display total sum */}
+        <p>Total Sum of All Products: ${totalSum.toFixed(2)}</p>
+        {/* Display sum for selected produts */}
+        <p>Total Sum of Selected Products: ${selectedSum.toFixed(2)}</p>
+
         {/* Loop through the filtered data and display each product */}
         <div className="product-list">
           {filteredData.map((product) => (
@@ -47,6 +71,8 @@ function App() {
               name={product.name}
               category={product.category}
               price={product.price}
+              units={product.units} // STRETCH: Display the number of units
+              rating={product.rating} // STRETCH: Display the rating as stars
             />
           ))}
         </div>
