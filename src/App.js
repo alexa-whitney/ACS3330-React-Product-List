@@ -5,19 +5,29 @@ import CategoryButton from './CategoryButton';
 import Product from './Product';
 
 function App() {
-  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [selectedCategories, setSelectedCategories] = useState(['All']);
 
   // Event handler for clicking on a category
   const handleCategoryClick = (categoryName) => {
-    setSelectedCategory(categoryName);
+    if (categoryName === 'All') {
+      setSelectedCategories(['All']);
+    } else {
+      setSelectedCategories(prevCategories => {
+        if (prevCategories.includes(categoryName)) {
+          return prevCategories.filter(category => category !== categoryName);
+        } else {
+          return [...prevCategories.filter(category => category !== 'All'), categoryName];
+        }
+      });
+    }
   };
 
   // Filter the list of products based on the selected category
-  const filteredData = selectedCategory === 'All'
+  const filteredData = selectedCategories.includes('All')
     // If the selected category is 'All', return all the products
     ? data
     // Otherwise, return only the products whose category matches the selected category
-    : data.filter(product => product.category === selectedCategory);
+    : data.filter(product => selectedCategories.includes(product.category));
 
   // STRETCH: Calculate the total sum of all product prices
   const totalSum = data.reduce((sum, item) => {
@@ -45,16 +55,16 @@ function App() {
           <CategoryButton
             label="All"
             onClick={() => handleCategoryClick('All')}
-            isSelected={selectedCategory === 'All'}
+            isSelected={selectedCategories.includes('All')}
           />
           {/* Display categories as buttons */}
-          {namesAndCategories.map((category, index) => (
+          {categoryCounts.map((category, index) => (
             <CategoryButton
               key={index}
               label={category.name}
               count={category.count}
               onClick={() => handleCategoryClick(category.name)}
-              isSelected={selectedCategory === category.name}
+              isSelected={selectedCategories.includes(category.name)}
             />
           ))}
         </div>
@@ -62,7 +72,6 @@ function App() {
         <p>Total Sum of All Products: ${totalSum.toFixed(2)}</p>
         {/* Display sum for selected produts */}
         <p>Total Sum of Selected Products: ${selectedSum.toFixed(2)}</p>
-
         {/* Loop through the filtered data and display each product */}
         <div className="product-list">
           {filteredData.map((product) => (
